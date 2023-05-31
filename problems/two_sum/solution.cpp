@@ -1,18 +1,19 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int len = nums.size();
-        vector<int> indices;
-        unordered_map<int, int> map;
-        for(int i=0;i<len;i++) {
-            if(map.find(target-nums[i]) != map.end()){
-                indices.push_back(i);
-                indices.push_back(map[target-nums[i]]);
-            } else {
-                map[nums[i]]=i;
+        map<int,int> map;
+        vector<int> res;
+        for(int i=0;i<nums.size();i++){
+            //check compliment of current int in map
+            if(map.find(nums[i]) != map.end()){
+                res.push_back(map[nums[i]]);
+                res.push_back(i);
+                return res;
             }
-            cout<<i<< " "<<nums[i]; 
+            else{
+                map[target-nums[i]]=i;
+            }
         }
-        return indices;
+        return res;
     }
 };
